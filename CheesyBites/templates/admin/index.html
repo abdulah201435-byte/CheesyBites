@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block title %}Dashboard | Cheesy Bites{% endblock %}
+
+{% block content %}
+<style>
+  .cb-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-bottom:24px}
+  .cb-card{display:flex;gap:16px;align-items:center;padding:20px;border-radius:12px;text-decoration:none;color:inherit;
+           background:rgba(127,127,127,.07);border:1px solid rgba(127,127,127,.22);transition:transform .15s,border-color .15s}
+  .cb-card:hover{transform:translateY(-2px);border-color:#facc15}
+  .cb-ico{display:grid;place-items:center;width:52px;height:52px;border-radius:12px;background:#facc15;color:#111}
+  .cb-ico .material-symbols-outlined{font-size:28px}
+  .cb-label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+  .cb-value{font-size:30px;font-weight:700;line-height:1.1}
+  .cb-note{font-size:13px;opacity:.7}
+  .cb-two{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .cb-box{padding:20px;border-radius:12px;background:rgba(127,127,127,.07);border:1px solid rgba(127,127,127,.22)}
+  .cb-box h2{font-size:16px;font-weight:700;margin:0 0 12px}
+  .cb-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid rgba(127,127,127,.2);text-decoration:none;color:inherit}
+  .cb-row:first-of-type{border-top:0}
+  .cb-row small{opacity:.65;white-space:nowrap}
+  .cb-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#facc15;margin-right:8px}
+  .cb-empty{opacity:.6;padding:8px 0}
+</style>
+
+<div class="cb-grid">
+  {% for c in cards %}
+  <a class="cb-card" href="{% url c.url %}">
+    <span class="cb-ico"><span class="material-symbols-outlined">{{ c.icon }}</span></span>
+    <span>
+      <span class="cb-label">{{ c.label }}</span><br>
+      <span class="cb-value">{{ c.value }}</span><br>
+      <span class="cb-note">{{ c.note }}</span>
+    </span>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="cb-two">
+  <div class="cb-box">
+    <h2>Latest contact messages</h2>
+    {% for m in latest_messages %}
+      <a class="cb-row" href="{% url 'admin:home_contactmessage_change' m.pk %}">
+        <span>{% if not m.is_read %}<span class="cb-dot"></span>{% endif %}<strong>{{ m.subject }}</strong> from {{ m.name }}</span>
+        <small>{{ m.created_at|date:"d M, H:i" }}</small>
+      </a>
+    {% empty %}<p class="cb-empty">No messages yet.</p>{% endfor %}
+  </div>
+  <div class="cb-box">
+    <h2>Latest reviews</h2>
+    {% for r in latest_reviews %}
+      <a class="cb-row" href="{% url 'admin:home_review_change' r.pk %}">
+        <span><strong>{{ r.name }}</strong>: {{ r.text|truncatechars:60 }}</span>
+        <small>{{ r.created_at|date:"d M, H:i" }}</small>
+      </a>
+    {% empty %}<p class="cb-empty">No reviews yet.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}
