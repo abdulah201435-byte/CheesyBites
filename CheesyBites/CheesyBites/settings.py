@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-^f_$+@-n=&atifz^6+ml)jxf$&=8a2t%4tqpuw+#d66vubj4u%
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['abdullah001.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # ---------- Applications ----------
@@ -83,7 +83,8 @@ USE_TZ = True
 
 
 # ---------- Static and media files ----------
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # uses your folder whether it is called "static" or "statics"
 STATICFILES_DIRS = [p for p in (BASE_DIR / 'static', BASE_DIR / 'statics') if p.exists()]
 
