@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,9 +66,18 @@ input,textarea,select{width:100%;background:var(--c);color:var(--w);border:1px s
 .chip{background:var(--c);color:var(--w);border:1px solid var(--c2);border-radius:999px;padding:8px 16px;cursor:pointer;font:500 14px 'DM Sans',sans-serif}
 .chip[aria-pressed=true]{background:var(--y);color:var(--k);border-color:var(--y)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-.card{background:var(--c);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--c2);transition:border-color .2s}
+.card{background:var(--c);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--c2);transition:border-color .2s,transform .2s}
+.click{cursor:pointer}
+.card.click:hover,.card.click:focus-visible{transform:translateY(-4px);border-color:var(--y)}
+#storyText{display:grid;gap:14px;align-content:start}
+.pcard{background:var(--k);border:1px solid var(--c2);border-left:5px solid var(--y);border-radius:var(--r);padding:18px 20px;transition:transform .2s,background .2s}
+.pcard h3{font-size:18px;color:var(--y);margin-bottom:6px}
+.pcard p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.pcard:nth-child(2){border-left-color:#ff6a59}.pcard:nth-child(2) h3{color:#ff6a59}
+.pcard:nth-child(3){border-left-color:#2ee66b}.pcard:nth-child(3) h3{color:#2ee66b}
+.pcard:hover,.pcard:focus-visible{transform:translateY(-3px);background:#141416}
 .card:hover{border-color:var(--y)}
-.pic{overflow:hidden;height:150px;display:grid;place-items:center;font-size:64px;background:linear-gradient(135deg,#3a2f00,#1c1c1e)}
+.pic{overflow:hidden;height:220px;display:grid;place-items:center;font-size:64px;background:#111}
 .inc{list-style:none;padding:0;display:grid;gap:4px;font-size:14px;color:var(--mut)}
 .inc li::before{content:"\2713  ";color:var(--y)}
 .gal{display:grid;gap:8px;margin-bottom:12px}
@@ -78,7 +86,7 @@ input,textarea,select{width:100%;background:var(--c);color:var(--w);border:1px s
 .thumbs button{flex:0 0 auto;padding:0;border:2px solid transparent;border-radius:8px;background:none;cursor:pointer}
 .thumbs button.on{border-color:var(--y)}
 .thumbs img{height:56px;width:80px;object-fit:cover;border-radius:6px;display:block}
-.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic img{width:100%;height:100%;object-fit:contain;display:block}
 .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
 .body h3{font-size:19px}
 .body p{color:var(--mut);font-size:14px}
@@ -97,7 +105,7 @@ label{font-size:14px;font-weight:500}
 .msg{font-size:14px;min-height:20px}
 .err{color:#ff8a80}.ok{color:#7be495}
 .pager{display:flex;gap:10px;align-items:center;margin-top:18px}
-dialog{background:var(--c);color:var(--w);border:1px solid var(--y);border-radius:var(--r);max-width:560px;width:92%;padding:26px}
+dialog{max-height:90vh;overflow:auto;background:var(--c);color:var(--w);border:1px solid var(--y);border-radius:var(--r);max-width:560px;width:92%;padding:26px}
 dialog::backdrop{background:rgba(0,0,0,.75)}
 dialog h3{font-size:24px;margin-bottom:8px}
 dialog .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
@@ -298,13 +306,13 @@ const CONFIG = {
   mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1287.8292098135591!2d73.02197453695254!3d31.409932870681057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392243002959b011%3A0xa887d504e0345b44!2sCheesious%20Bites!5e0!3m2!1sen!2s!4v1793358405140!5m2!1sen!2s",
   hours: "Daily, 3:00 PM to 3:00 AM",
   heroImages: [               // slideshow pictures (web links or "/static/images/..." files)
-     "https://lh3.googleusercontent.com/grass-cs/AABkmLf5e3Y6o8wEAoX-r15T3uQaKthyr0g2Xp23c6wSsQysV-BzlRuZDUzzsMsZ7AO1jH-CtwGGX8mYhGD2u35oTNMJTI8fhRdCfuB6qv-PXllskw_5guJlgVEh6V6V5rkTMe6EVpKVHaOlLjAp=s0",
-      "https://lh3.googleusercontent.com/grass-cs/AABkmLdfjpzeKcNFYfFOEwWUwXYw0Zx-Dt7yRDi2XkUAHG1hZPl81b3cjR8bKeaLP-8WOgTMNJVaenPeeWCY5grUhM7YUU-1_ODFhnb2eYrF7lldCGtHixEbqtrBIUO1a5MKn7b0LRjB=s0",
-      "https://lh3.googleusercontent.com/grass-cs/AABkmLcdY3lnle7RbrWDYgKRtCn69Q5gx0HeSWgombaj15LfpIi5sPOyvunjukjowl1wbn6DdjP6-pDPSCM7KThs5-vNRDlqFZf9I-6NKd-VXlbENjd9ZY5Pbl8VLcg4mkipqD0C1II18c4isVU=s0",
-      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Sih6JxTDZMj5htR5kiZp-5Xr9BEkvTc-tRqu62PhlLDzz94LDAb6dAwxcoAbASX2CjXB3MzE--trWJGnoF-h4rkdXomwv9o16VnDrREJND1bMk8QCD5h_wkJ3wGRe0MO58rPeE=s0",
-      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RnLVvAtaaN388mIQclQCgBzzU9E8fGOTaWkeUII2eH-CeZKSIFsowgDi_spA7h57Zq8EKaLMmcx1taPMpx3yEF4sXy4jn20QsIssE0AsFvP-BwQxLsUc2SB490i3Qy2dVU6SwzX4gVWaU=s0",
-      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SGQXG3iI_8N6lp2N29yEQbtrhi31cq8yEMt8PmtoWXxVWvI7y22SqpOf_MBFzsctSojLz1N00fBOX4Wwx3M-eSoYy3lyey_pqzsvaGncDUP59XmoXWcChJX_qTpMBD-zq4dQDaDBnn4xVU=s0",
-      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T7F3L3rDhemziHhfjLTSRohFt9gGvETmj_JH3cwq81VDPqAncLZWiOga3Ql-3WSMj8JTEiliER6uKeacrHqk5o4izjQiPOyGYR-dJBrWjRfnDibMS1EtMkstRogT6WV8pOraphKTRkYfC9=s0",
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLf5e3Y6o8wEAoX-r15T3uQaKthyr0g2Xp23c6wSsQysV-BzlRuZDUzzsMsZ7AO1jH-CtwGGX8mYhGD2u35oTNMJTI8fhRdCfuB6qv-PXllskw_5guJlgVEh6V6V5rkTMe6EVpKVHaOlLjAp=w1600",
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLdfjpzeKcNFYfFOEwWUwXYw0Zx-Dt7yRDi2XkUAHG1hZPl81b3cjR8bKeaLP-8WOgTMNJVaenPeeWCY5grUhM7YUU-1_ODFhnb2eYrF7lldCGtHixEbqtrBIUO1a5MKn7b0LRjB=w1600",
+    "https://lh3.googleusercontent.com/grass-cs/AABkmLcdY3lnle7RbrWDYgKRtCn69Q5gx0HeSWgombaj15LfpIi5sPOyvunjukjowl1wbn6DdjP6-pDPSCM7KThs5-vNRDlqFZf9I-6NKd-VXlbENjd9ZY5Pbl8VLcg4mkipqD0C1II18c4isVU=w1600",
+    "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Sih6JxTDZMj5htR5kiZp-5Xr9BEkvTc-tRqu62PhlLDzz94LDAb6dAwxcoAbASX2CjXB3MzE--trWJGnoF-h4rkdXomwv9o16VnDrREJND1bMk8QCD5h_wkJ3wGRe0MO58rPeE=w1600",
+    "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RnLVvAtaaN388mIQclQCgBzzU9E8fGOTaWkeUII2eH-CeZKSIFsowgDi_spA7h57Zq8EKaLMmcx1taPMpx3yEF4sXy4jn20QsIssE0AsFvP-BwQxLsUc2SB490i3Qy2dVU6SwzX4gVWaU=w1600",
+    "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SGQXG3iI_8N6lp2N29yEQbtrhi31cq8yEMt8PmtoWXxVWvI7y22SqpOf_MBFzsctSojLz1N00fBOX4Wwx3M-eSoYy3lyey_pqzsvaGncDUP59XmoXWcChJX_qTpMBD-zq4dQDaDBnn4xVU=w1600",
+    "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T7F3L3rDhemziHhfjLTSRohFt9gGvETmj_JH3cwq81VDPqAncLZWiOga3Ql-3WSMj8JTEiliER6uKeacrHqk5o4izjQiPOyGYR-dJBrWjRfnDibMS1EtMkstRogT6WV8pOraphKTRkYfC9=w1600"
   ],
   heroSeconds: 5,
   currency: "Rs."
@@ -370,7 +378,6 @@ const fmtDate = t => new Date(t).toLocaleString("en-PK", {dateStyle:"medium", ti
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><mask id="m"><rect width="200" height="200" fill="#fff"/><circle cx="176" cy="46" r="17" fill="#000"/><circle cx="160" cy="26" r="15" fill="#000"/><circle cx="186" cy="72" r="13" fill="#000"/><circle cx="143" cy="14" r="12" fill="#000"/></mask></defs><g mask="url(#m)"><circle cx="100" cy="100" r="94" fill="#b9650f"/><circle cx="100" cy="100" r="82" fill="#ffc933"/><path d="M40 70q20 18 40 4t40 6 40-8M30 120q25 14 45 0t45 8 45-6" stroke="#ffe27a" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#c0392b"><circle cx="70" cy="62" r="13"/><circle cx="124" cy="80" r="13"/><circle cx="82" cy="118" r="13"/><circle cx="138" cy="134" r="12"/><circle cx="50" cy="104" r="10"/></g><g fill="#8e2a1f"><circle cx="66" cy="58" r="3"/><circle cx="76" cy="66" r="3"/><circle cx="120" cy="76" r="3"/><circle cx="130" cy="84" r="3"/><circle cx="78" cy="114" r="3"/><circle cx="88" cy="122" r="3"/></g></g></svg>`;
   const h = document.getElementById("home");
   const artUrl = 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '")';
-  h.style.setProperty("--art", artUrl);
   // slideshow: pictures load first, then slide in from the right; dots let visitors jump to a picture
   const box = document.getElementById("slides"), dots = document.getElementById("heroDots"), slides = [], list = CONFIG.heroImages || [];
   let cur = -1, timer;
@@ -477,7 +484,7 @@ function renderMenu(){
   if (!MENU.length){ $("#menuGrid").innerHTML = `<div class="empty">The menu has not been added yet. Please check back soon.</div>`; return; }
   const list = MENU.filter(m => (cat === "All" || m.cat === cat) && m.name.toLowerCase().includes(q));
   $("#menuGrid").innerHTML = list.length ? list.map(m => { const s = sz(m); return `
-   <article class="card" data-mid="${esc(m.id)}"><div class="pic" aria-hidden="true">${pic(m.image, m.emoji || "🍕")}</div><div class="body">
+   <article class="card click" tabindex="0" data-mid="${esc(m.id)}"><div class="pic" aria-hidden="true">${pic(m.image, m.emoji || "🍕")}</div><div class="body">
     ${m.cat ? `<span class="tag">${esc(m.cat)}</span>` : ""}
     <h3>${esc(m.name)}</h3>${m.desc ? `<p>${esc(m.desc)}</p>` : ""}
     ${s.length > 1 ? `<select class="size" aria-label="Choose size for ${esc(m.name)}">${s.map((x, i) => `<option value="${i}">${esc(x.label || "Regular")} - ${money(x.price)}</option>`).join("")}</select>` : ""}
@@ -491,12 +498,25 @@ $("#menuGrid").onchange = e => {
   card.querySelector(".price").textContent = money(sz(m)[+sel.value].price);
 };
 $("#menuGrid").onclick = e => {
-  const a = e.target.closest("[data-order]"); if (!a) return;
-  e.preventDefault();
-  const card = a.closest("article"), m = MENU.find(x => String(x.id) === a.dataset.order), sel = card.querySelector("select.size"), s = sz(m)[sel ? +sel.value : 0];
-  const url = waLink(`Hello Cheesy Bites, I would like to order: ${m.name}${s.label ? " (" + s.label + ")" : ""} - ${money(s.price)}. Please confirm my order.`);
-  if (isMobile) location.href = url; else window.open(url, "_blank", "noopener");
+  const a = e.target.closest("[data-order]");
+  if (a){
+    e.preventDefault();
+    const card = a.closest("article"), m = MENU.find(x => String(x.id) === a.dataset.order), sel = card.querySelector("select.size"), s = sz(m)[sel ? +sel.value : 0];
+    const url = waLink(`Hello Cheesy Bites, I would like to order: ${m.name}${s.label ? " (" + s.label + ")" : ""} - ${money(s.price)}. Please confirm my order.`);
+    if (isMobile) location.href = url; else window.open(url, "_blank", "noopener");
+    return;
+  }
+  if (e.target.closest("select")) return;
+  const card = e.target.closest("article[data-mid]"); if (card) showDish(card.dataset.mid);
 };
+function showDish(id){
+  const m = MENU.find(x => String(x.id) === String(id)); if (!m) return;
+  const s = sz(m);
+  openDlg(`${m.image ? `<img src="${esc(m.image)}" alt="" style="width:100%;max-height:60vh;object-fit:contain;border-radius:10px;background:#111;margin-bottom:12px">` : ""}
+   ${m.cat ? `<span class="tag">${esc(m.cat)}</span>` : ""}<h3 style="margin-top:8px">${esc(m.name)}</h3>${m.desc ? `<p>${esc(m.desc)}</p>` : ""}
+   <ul class="inc" style="margin-top:10px">${s.map(x => `<li>${esc(x.label || "Regular")}: ${money(x.price)}</li>`).join("")}</ul>
+   <div class="actions">${s.map(x => orderBtn(s.length > 1 ? "Order " + (x.label || "Regular") : "Order on WhatsApp", `Hello Cheesy Bites, I would like to order: ${m.name}${x.label ? " (" + x.label + ")" : ""} - ${money(x.price)}. Please confirm my order.`)).join("")}</div>${orderNote}`);
+}
 
 /* offers: the status (available, coming soon, expired, not available) is worked out on the server */
 function offerStatus(o){
@@ -527,7 +547,7 @@ function renderOffers(){
   const q = $("#oq").value.trim().toLowerCase();
   const list = OFFERS.filter(o => offerStatus(o) !== "draft" && (o.name + " " + (o.desc || "") + " " + (o.reason || "")).toLowerCase().includes(q));
   $("#offerGrid").innerHTML = list.length ? list.map(o => { const s = offerStatus(o); return `
-   <article class="card"><div class="pic" aria-hidden="true">${pic(o.image, o.emoji || "🏷️")}</div><div class="body">
+   <article class="card click" tabindex="0" data-slug="${esc(o.slug)}"><div class="pic" aria-hidden="true">${pic(o.image, o.emoji || "🏷️")}</div><div class="body">
     <span class="tag ${stLabel[s][0]}">${stLabel[s][1]}</span>
     <h3>${esc(o.name)}</h3>${priceHtml(o)}
     ${incHtml(o)}${o.desc ? `<p>${esc(o.desc)}</p>` : ""}
@@ -535,7 +555,7 @@ function renderOffers(){
    </div></article>`; }).join("") : `<div class="empty">No offers match "${esc($("#oq").value)}".</div>`;
 }
 $("#oq").oninput = renderOffers;
-$("#offerGrid").onclick = e => { const a = e.target.closest("[data-offer]"); if (a){ e.preventDefault(); go("offers/" + a.dataset.offer); } };
+$("#offerGrid").onclick = e => { const a = e.target.closest("[data-offer]") || e.target.closest("article[data-slug]"); if (a){ e.preventDefault(); go("offers/" + (a.dataset.offer || a.dataset.slug)); } };
 function showOffer(slug){
   if (!dataLoaded) return openDlg(`<h3>Loading offer...</h3>`);
   const o = OFFERS.find(x => x.slug === slug && !x.draft);
@@ -634,21 +654,32 @@ loadCatalog();
 setInterval(loadCatalog, 60000);
 
 /* our story: text, posts and team come from the admin panel */
-let STORY = {page:{}, posts:[], team:[]}, storyLoaded = false;
+let STORY = {page:{}, posts:[], team:[]}, storyLoaded = false, STORY_PARTS = [];
 const nl = t => esc(t).replace(/\n/g, "<br>");
 function renderStory(){
   const p = STORY.page || {}, posts = STORY.posts || [], team = STORY.team || [];
   const parts = [["", p.intro], ["Our mission", p.mission], ["Food quality", p.quality]].filter(x => x[1]);
-  $("#storyText").innerHTML = parts.map(([h, t], i) => `<p${i ? ' style="margin-top:12px"' : ""}>${h ? `<strong>${h}:</strong> ` : ""}${nl(t)}</p>`).join("");
+  STORY_PARTS = parts;
+  $("#storyText").innerHTML = parts.map(([h, t], i) => `<div class="pcard click" tabindex="0" data-part="${i}"><h3>${esc(h || "Our story")}</h3><p>${nl(t)}</p></div>`).join("");
   $("#storyPic").innerHTML = p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" style="width:100%;border-radius:var(--r);display:block">` : "";
   $("#storyTop").classList.toggle("hidden", !parts.length && !p.image);
-  $("#storyGrid").innerHTML = posts.map(s => `<article class="card">${s.image ? `<div class="pic" aria-hidden="true">${pic(s.image, "")}</div>` : ""}<div class="body"><h3>${esc(s.title)}</h3><p>${esc(s.excerpt)}</p><span class="facts">${esc(s.date)}</span><a href="/stories/${esc(s.slug)}" data-story="${esc(s.slug)}">Read story</a></div></article>`).join("");
+  $("#storyGrid").innerHTML = posts.map(s => `<article class="card click" tabindex="0" data-slug="${esc(s.slug)}">${s.image ? `<div class="pic" aria-hidden="true">${pic(s.image, "")}</div>` : ""}<div class="body"><h3>${esc(s.title)}</h3><p>${esc(s.excerpt)}</p><span class="facts">${esc(s.date)}</span><a href="/stories/${esc(s.slug)}" data-story="${esc(s.slug)}">Read story</a></div></article>`).join("");
   $("#storyGrid").classList.toggle("hidden", !posts.length);
-  $("#staffGrid").innerHTML = team.map(t => `<article class="card"><div class="pic" aria-hidden="true">${pic(t.photo, "&#128100;")}</div><div class="body"><h3>${esc(t.name)}</h3>${t.role ? `<span class="tag">${esc(t.role)}</span>` : ""}${t.bio ? `<p>${esc(t.bio)}</p>` : ""}</div></article>`).join("");
+  $("#staffGrid").innerHTML = team.map((t, i) => `<article class="card click" tabindex="0" data-ti="${i}"><div class="pic" aria-hidden="true">${pic(t.photo, "&#128100;")}</div><div class="body"><h3>${esc(t.name)}</h3>${t.role ? `<span class="tag">${esc(t.role)}</span>` : ""}${t.bio ? `<p>${esc(t.bio)}</p>` : ""}</div></article>`).join("");
   $("#teamTitle").classList.toggle("hidden", !team.length); $("#staffGrid").classList.toggle("hidden", !team.length);
   $("#storyEmpty").classList.toggle("hidden", !storyLoaded || !!(parts.length || p.image || posts.length || team.length));
 }
-$("#storyGrid").onclick = e => { const a = e.target.closest("[data-story]"); if (a){ e.preventDefault(); go("stories/" + a.dataset.story); } };
+$("#storyGrid").onclick = e => { const a = e.target.closest("[data-story]") || e.target.closest("article[data-slug]"); if (a){ e.preventDefault(); go("stories/" + (a.dataset.story || a.dataset.slug)); } };
+$("#storyText").onclick = e => {
+  const c = e.target.closest("[data-part]"); if (!c) return;
+  const [h, t] = STORY_PARTS[+c.dataset.part] || [];
+  openDlg(`<h3>${esc(h || "Our story")}</h3><p style="margin-top:8px">${nl(t || "")}</p>`);
+};
+$("#staffGrid").onclick = e => {
+  const c = e.target.closest("[data-ti]"); if (!c) return;
+  const t = (STORY.team || [])[+c.dataset.ti]; if (!t) return;
+  openDlg(`${t.photo ? `<img src="${esc(t.photo)}" alt="" style="width:100%;max-height:60vh;object-fit:contain;border-radius:10px;background:#111;margin-bottom:12px">` : ""}<h3>${esc(t.name)}</h3>${t.role ? `<span class="tag">${esc(t.role)}</span>` : ""}${t.bio ? `<p style="margin-top:10px">${nl(t.bio)}</p>` : ""}`);
+};
 function showStory(slug){
   if (!storyLoaded) return openDlg(`<h3>Loading story...</h3>`);
   const s = (STORY.posts || []).find(x => x.slug === slug);
@@ -727,6 +758,7 @@ const spy = new IntersectionObserver(es => {
   es.forEach(en => { if (en.isIntersecting) setUrl(en.target.id, true); });
 }, {rootMargin:"-45% 0px -54% 0px", threshold:0});
 document.querySelectorAll(".section-item").forEach(x => spy.observe(x));
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches(".click[tabindex]")) e.target.click(); });
 addEventListener("popstate", route);
 if (useHash) addEventListener("hashchange", route);
 if (getRoutePath()) route();
